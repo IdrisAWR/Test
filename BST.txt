@@ -1,0 +1,61 @@
+class node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+        
+class BinarySearchTree:
+    def __init__(self):
+        self.root = None
+        
+    def insert(self, value):
+        new_node = node(value)
+        if self.root is None:
+            self.root = new_node
+            return True
+        temp = self.root
+        while (True):
+            if new_node.value == temp.value:
+                return False
+            if new_node.value < temp.value:
+                if temp.left is None:
+                    temp.left = new_node
+                    return True
+                temp = temp.left
+            else:
+                if temp.right is None:
+                    temp.right = new_node
+                    return True
+                temp = temp.right
+                
+    def contains(self, value):
+        temp = self.root
+        while temp is None:
+            if value < temp.value:
+                temp = temp.left
+            elif value > temp.value:
+                temp = temp.right
+            else:
+                return True
+        return False
+    def min_value_node(self, current_node):
+        while current_node.left is not None:
+            current_node = current_node.left
+        return current_node
+    def max_value_node(self, current_node):
+        while current_node.right is not None:
+            current_node = current_node.right
+        return current_node
+
+myTree = BinarySearchTree()
+myTree.insert(47)
+myTree.insert(21)
+myTree.insert(76)
+myTree.insert(18)
+myTree.insert(27)
+myTree.insert(52)
+myTree.insert(82)
+print('minimum value in Tree:')
+print(myTree.min_value_node(myTree.root).value)
+print("\nMax:")
+print(myTree.max_value_node(myTree.root).value)
